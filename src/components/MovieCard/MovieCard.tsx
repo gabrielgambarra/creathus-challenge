@@ -1,19 +1,14 @@
+import { MovieInfo } from "../../models/MovieInfo.interface";
 import { MovieCardContainer } from "./MovieCardStyle";
 
-interface MovieInfo {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface MovieCardProps {
+interface Props {
   film: MovieInfo;
+  seeDetail: (film: MovieInfo) => void;
 }
 
-const MovieCard = ({ film }: MovieCardProps) => {
+const MovieCard = ({ film, seeDetail }: Props) => {
   return (
-    <MovieCardContainer>
+    <MovieCardContainer onClick={() => seeDetail(film)}>
       <img src={film.image} alt="Movie post" />
 
       <div>
