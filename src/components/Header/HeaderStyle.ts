@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.nav`
@@ -23,5 +24,21 @@ export const HeaderContainer = styled.nav`
       color: #333;
       cursor: pointer;
     }
+  }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  color: #fff;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
+    color: #fff;
+  }
+
+  &[class*="active"] {
+    text-decoration: underline;
   }
 `;

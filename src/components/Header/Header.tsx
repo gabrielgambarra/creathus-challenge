@@ -1,15 +1,14 @@
-import { Link } from "react-router-dom";
-import { HeaderContainer } from "./HeaderStyle";
+import { HeaderContainer, StyledNavLink } from "./HeaderStyle";
 
 const Header = () => {
   return (
     <HeaderContainer>
       <ul>
         <li>
-          <Link to={`movies`}>Filmes</Link>
+          <StyledNavLink to={`movies`}>Filmes</StyledNavLink>
         </li>
         <li>
-          <Link to={`create`}>Adicionar</Link>
+          <StyledNavLink to={`create`}>Adicionar</StyledNavLink>
         </li>
       </ul>
     </HeaderContainer>
