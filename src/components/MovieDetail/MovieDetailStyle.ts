@@ -34,7 +34,7 @@ export const ActionRow = styled.div`
 
 export const DescriptionContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   height: fit-content;
   overflow: auto;

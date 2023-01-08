@@ -7,3 +7,16 @@ export const MovieListContainer = styled.div`
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 `;
+
+export const MoviesPagination = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1em;
+
+  button {
+    margin-left: 1em;
+    padding: 0.5em;
+    cursor: pointer;
+  }
+`;
