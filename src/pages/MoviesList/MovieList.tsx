@@ -40,10 +40,10 @@ const MovieList = () => {
           onClick={() => getAllMovies(previous?.page)}
           disabled={!previous}
         >
-          Previus
+          Anterior
         </button>
         <button onClick={() => getAllMovies(next?.page)} disabled={!next}>
-          Next
+          Próximo
         </button>
       </MoviesPagination>
       <MovieListContainer>
