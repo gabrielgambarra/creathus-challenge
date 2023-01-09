@@ -24,12 +24,6 @@ export const ActionRow = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  button {
-    margin: 0 0.5em;
-    padding: 0.5em;
-    cursor: pointer;
-  }
 `;
 
 export const DescriptionContainer = styled.div`
