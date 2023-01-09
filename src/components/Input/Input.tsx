@@ -1,5 +1,6 @@
 import { useField } from "@unform/core";
 import { useEffect, useRef } from "react";
+import { InputContainer } from "./InputStyle";
 
 interface Props {
   name: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const Input = ({ name, textarea, title, type }: Props) => {
   const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -29,7 +30,7 @@ const Input = ({ name, textarea, title, type }: Props) => {
   }, [fieldName, registerField]);
 
   return (
-    <>
+    <InputContainer>
       <label htmlFor={name}>{title}</label>
       {!textarea ? (
         <>
@@ -53,7 +54,8 @@ const Input = ({ name, textarea, title, type }: Props) => {
           ></textarea>
         </>
       )}
-    </>
+      {error && <span className="error">{error}</span>}
+    </InputContainer>
   );
 };
 

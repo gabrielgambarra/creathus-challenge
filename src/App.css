@@ -13,3 +13,11 @@ button {
 input, textarea {
   outline: none;
 }
+
+.error {
+  color: #f44336;
+}
+
+.image-tip {
+  font-size: small;
+}

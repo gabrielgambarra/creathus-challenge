@@ -1,14 +1,15 @@
 import { useField } from "@unform/core";
 import { useEffect, useRef } from "react";
+import { InputContainer } from "./InputStyle";
 
 interface Props {
   name: string;
   title: string;
 }
 
-const InputFile = ({ name, title }: Props) => {
+const InputFile = ({ name, title, ...props }: Props) => {
   const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -27,7 +28,7 @@ const InputFile = ({ name, title }: Props) => {
   }, [fieldName, registerField]);
 
   return (
-    <>
+    <InputContainer>
       <label htmlFor={name}>{title}</label>
       <input
         ref={inputRef}
@@ -35,8 +36,13 @@ const InputFile = ({ name, title }: Props) => {
         id={name}
         name={name}
         defaultValue={defaultValue}
+        {...props}
       />
-    </>
+      {!error && (
+        <span className="image-tip">Imagem deve ter 500x750 de tamanho</span>
+      )}
+      {error && <span className="error">{error}</span>}
+    </InputContainer>
   );
 };
 

@@ -29,11 +29,6 @@ export const AddMovieForm = styled.div`
     textarea {
       resize: none;
     }
-
-    input,
-    textarea {
-      margin-bottom: 1em;
-    }
   }
 `;
 

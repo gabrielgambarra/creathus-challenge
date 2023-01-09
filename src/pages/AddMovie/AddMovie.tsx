@@ -1,14 +1,17 @@
 import { Form } from "@unform/web";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
 import InputFile from "../../components/Input/InputFile";
 import api from "../../utils/api";
 import { AddMovieContainer, AddMovieForm, FormActions } from "./AddMovieStyle";
+import { imgIsInTheRightSize, validateForm } from "./validation";
 
 const AddMovie = () => {
+  const formRef = useRef(null);
   const navigate = useNavigate();
 
-  async function handleSubmit(data: any) {
+  const buildPayload = (data: any) => {
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       if (key === "image") {
@@ -18,22 +21,31 @@ const AddMovie = () => {
       }
     });
 
-    try {
-      await api.post("/movies", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    return formData;
+  };
+
+  async function handleSubmit(data: any) {
+    validateForm(data, formRef, async () => {
+      if (imgIsInTheRightSize(data.image, formRef)) {
+        try {
+          const payload = buildPayload(data);
+          await api.post("/movies", payload, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
   }
 
   return (
     <AddMovieContainer>
       <AddMovieForm>
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="title" title="Título" type="text" />
 
           <Input name="description" title="Descrição" textarea />
