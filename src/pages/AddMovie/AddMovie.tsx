@@ -26,7 +26,7 @@ const AddMovie = () => {
 
   async function handleSubmit(data: any) {
     validateForm(data, formRef, async () => {
-      if (imgIsInTheRightSize(data.image, formRef)) {
+      imgIsInTheRightSize(data.image, formRef, async () => {
         try {
           const payload = buildPayload(data);
           await api.post("/movies", payload, {
@@ -38,7 +38,7 @@ const AddMovie = () => {
         } catch (error) {
           console.log(error);
         }
-      }
+      });
     });
   }
 

@@ -10,6 +10,7 @@ export const validateForm = async (
   formRef: any,
   callBack: () => void
 ) => {
+  formRef.current.setErrors({});
   try {
     await schema.validate(formData, {
       abortEarly: false,
@@ -29,25 +30,22 @@ export const validateForm = async (
   }
 };
 
-export const imgIsInTheRightSize = (file: any, formRef: any): boolean => {
-  let isInTheRightSize = false;
+export const imgIsInTheRightSize = (
+  file: any,
+  formRef: any,
+  callback: () => void
+) => {
   if (!file) {
-    isInTheRightSize = false;
     // @ts-ignore
     formRef.current.setFieldError("image", "Imagem obrigatória");
-
-    return isInTheRightSize;
   }
 
   let img = new Image();
   img.src = window.URL.createObjectURL(file);
   img.onload = () => {
     if (img.width === 500 && img.height === 750) {
-      isInTheRightSize = true;
-      return true;
-    }
-    if (formRef !== null) {
-      isInTheRightSize = false;
+      callback();
+    } else {
       // @ts-ignore
       formRef.current.setFieldError(
         "image",
@@ -56,6 +54,4 @@ export const imgIsInTheRightSize = (file: any, formRef: any): boolean => {
     }
     return true;
   };
-
-  return isInTheRightSize;
 };
